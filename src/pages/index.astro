@@ -1,0 +1,16 @@
+---
+import LinkCard from "@/components/LinkCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Link } from "astro:db";
+import { db } from "astro:db";
+
+const links = await db.select().from(Link);
+---
+
+<BaseLayout>
+  <div
+    class="grid gap-6 grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] items-start"
+  >
+    {links.map((link) => <LinkCard link={link} />)}
+  </div>
+</BaseLayout>
